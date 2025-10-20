@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <script src="https://unpkg.com/vue@3.4.18/dist/vue.global.js"></script>
+</head>
+<body>
+  <div id="calculator">
+    <!-- Modify elements addend1, addend2, and total -->
+    <input id="addend1" ref="addend1" v-model="addend1" type="text" @click="handleClick" /> + <input id="addend2" ref="addend2" v-model="addend2" type="text" @click="handleClick" /> = <span id="total"></span>
+    
+    
+  </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+
+  <script>
+      
+    new Vue({
+        el: '#calculator',
+        data() {
+            return {
+              addend1: '',
+              addend2: '',
+            };
+          },
+        methods: {
+          handleClick(e) {
+              const addend1 = this.$refs.addend1.value;
+              const addend2 = this.$refs.addend2.value;
+              const total = parseInt(addend1) + parseInt(addend2);
+              document.getElementById('total').innerText = total;
+          }
+        },
+       watch: {
+            addend1(newValue, oldValue) {
+              // This function will be called whenever inputValue 1 changes
+              this.handleClick();
+             
+              
+            },
+            addend2(newValue, oldValue) {
+              // This function will be called whenever inputValue 2 changes
+              this.handleClick();
+              
+            },
+          },
+    });
+    
+    function updateValue(id, value) {
+      const element = document.getElementById(id);
+      element.value = value;
+      element.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
+    }
+
+    updateValue('addend1', 10);
+    updateValue('addend2', 10);
+    document.getElementById("addend1").click();
+    document.getElementById("addend1").focus();
+
+    setTimeout(() => console.log(document.getElementById('total').innerText));
+    
+    
+    
+    
+      
+  </script>
+</body>
+</html>
